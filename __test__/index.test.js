@@ -8,7 +8,11 @@ describe('Google', () => {
     await expect(page).toMatch('google')
   })
 
-  it('should input "Justin"', async () => {
-    await expect(page).toFill('input[name="q"]', 'Justin')
+  it('should search "Justin"', async () => {
+    await page.focus('input[name="q"]')
+    await page.keyboard.type('Justin')
+    await page.keyboard.press('Enter')
+    await page.waitForNavigation()
+    await expect(page).toMatch('Justin Bieber')
   })
 });
